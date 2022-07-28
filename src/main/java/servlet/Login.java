@@ -19,7 +19,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String kullanici=request.getParameter("kullanici");
         String sifre=request.getParameter("sifre");
-        Kullanici k=new KullaniciDao().getirKullanici(kullanici, sifre);
+        Kullanici k=new Kullanici();
 
     }
 
