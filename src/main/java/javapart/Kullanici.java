@@ -8,6 +8,7 @@ public class Kullanici {
     String email;
 
     public Kullanici() {
+
     }
 
     public Kullanici(int id, String kullanici, String sifre, String email) {
