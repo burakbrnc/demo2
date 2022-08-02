@@ -27,5 +27,9 @@
         </tr>
     </table>
 </form>
+<form action="Register" method="get"><tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" value="Register" /></td>
+</tr></form>
 </body>
 </html>

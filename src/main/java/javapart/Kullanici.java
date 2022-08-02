@@ -11,7 +11,7 @@ public class Kullanici {
 
     }
 
-    public Kullanici(int id, String kullanici, String sifre, String email) {
+    public Kullanici(int id, String kullanici, String sifre) {
         this.id = id;
         this.kullanici = kullanici;
         this.sifre = sifre;
