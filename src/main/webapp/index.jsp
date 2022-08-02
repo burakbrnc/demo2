@@ -27,9 +27,20 @@
         </tr>
     </table>
 </form>
-<form action="Register" method="get"><tr>
+<form action="Register" method="get" >
+    <tr>
+        <table align="center">
     <td>&nbsp;</td>
-    <td><input type="submit" value="Register" /></td>
-</tr></form>
+    <td><input type="submit" value="Register" id="register"/></td>
+
+</tr>
+        </table>
+</form>
 </body>
+<style>
+    #register{
+        margin-left: -49px;
+
+    }
+</style>
 </html>
