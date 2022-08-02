@@ -22,33 +22,29 @@ public class Erisim {
 
         Scanner dinle = new Scanner(System.in);
         String a;
-        Kullanici k = null;
+        Kullanici k=null;
 
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
-            c = getConnection("jdbc:postgresql://localhost:5432/firstdatabase",
+            c = getConnection("jdbc:postgresql://localhost:5432/idpw",
                     "postgres", "burak586a");
 
-            String query = "Select * from idpw where username=? and password=?";
+            String query = "select user_id, username,password from idpw where username=? and password=?";
             PreparedStatement pst = c.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
             pst.setString(1, Username);
             pst.setString(2, Password);
-            while (rs.next()) {
-                k=new Kullanici(rs.getInt("id"), rs.getString("Username"), rs.getString("password"));
+            ResultSet rs = pst.executeQuery();
 
+            while (rs.next()) {
+                k=new Kullanici(rs.getInt("user_id"),rs.getString("Username"), rs.getString("password"));
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-
-
-
-
-    return null;
+        return k;
     }
 
 

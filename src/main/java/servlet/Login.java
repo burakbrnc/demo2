@@ -26,22 +26,13 @@ public class Login extends HttpServlet {
         if(k!=null) {
             request.getSession().setAttribute("kullanici", k);
             response.sendRedirect("admin/index.jsp");
-            request.getRequestDispatcher("admin/index.jsp").forward(request,response);
-
         }
         else {
             request.getRequestDispatcher("/index.jsp").forward(request,response);
         }
 
 
-//if(k!=null){
-// req.getSession().setAttribute("kullanici", k);
-// resp.sendRedirect("admin/index.jsp");
-// }
-// else{
-// req.getRequestDispatcher("/index.jsp").forward(req, resp);
-// }
-// }
+
 
 
 
