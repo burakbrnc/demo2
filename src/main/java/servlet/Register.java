@@ -15,6 +15,8 @@ public class Register extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String kullanici=request.getParameter("kullanici");
+        String sifre=request.getParameter("sifre");
+        System.out.println(sifre);
     }
 }

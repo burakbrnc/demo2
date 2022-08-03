@@ -186,7 +186,7 @@
 <div class="background"></div>
 <div class="container">
     <h2>Login Form</h2>
-    <form action="login" method="post">
+    <form action="Register" method="post">
 
         <div class="form-item">
                 <span class="material-icons-outlined">
