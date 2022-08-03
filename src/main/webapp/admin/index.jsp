@@ -20,5 +20,14 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="../logout">logout</a></h3>
+
+<form action="../Patient" method="post">
+    <p><button> Hasta Ekle</button></p>
+
+
+
+</form>
+
+
 </body>
 </html>
