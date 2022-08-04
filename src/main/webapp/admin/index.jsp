@@ -12,21 +12,84 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <!--css files-->
+    <link href="jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="jtable/themes/metro/blue/jtable.css" rel="stylesheet" type="text/css">
+    <!--js files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="jtable/jquery.jtable.min.js" type="text/javascript"></script>
 </head>
 <body>
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<h3>Welcome ${kullanici.kullanici}
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="../logout">logout</a></h3>
-
-<form action="../Patient" method="post">
-    <p><button> Hasta Ekle</button></p>
+<div id="PatientTableContainer"></div>
 
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PatientTableContainer').jtable({
+            title: 'Table of patients',
+            actions: {
+                listAction: '/GettingStarted/PersonList',
+                createAction: '/GettingStarted/CreatePerson',
+                updateAction: '/GettingStarted/UpdatePerson',
+                deleteAction: '/GettingStarted/DeletePerson'
+            },
+            fields: {
+                patient_id: {
+                    key: true,
+                    list: false
+                },
+                first_name: {
+                    title: 'first_Name',
+                    width: '40%'
+                },
+                last_name: {
+                    title: 'last_Name',
+                    width: '40%'
+                },
+                tc_no: {
+                    title: 'tc_no',
+                    width: '20%'
+                },
 
-</form>
+                date_of_birth: {
+                    title: 'date_of_birth',
+                    width: '30%',
+                    type: 'date',
+                    create: false,
+                    edit: false
+                },
+                tel_no: {
+                    title: 'tel_no',
+                    width: '20%'
+                },
+                job: {
+                    title: 'job',
+                    width: '40%'
+                },
+                gender: {
+                    title: 'gender',
+                    width: '40%'
+                },
+
+                report_date: {
+                    title: 'report_date',
+                    width: '30%',
+                    type: 'date',
+                    create: false,
+                    edit: true
+                }
+                address: {
+                    title: 'address',
+                    width: '40%'
+                },
+            }
+        });
+    });
+</script>
+
+
+
 
 
 </body>
