@@ -192,14 +192,21 @@
                 <span class="material-icons-outlined">
                     account_circle
                     </span>
-            <input type="text" name="kullanici" id="fullname" placeholder="full name">
+            <input type="text" name="firstname" id="firstname" placeholder="first name">
         </div>
 
         <div class="form-item">
                 <span class="material-icons-outlined">
                     account_circle
                     </span>
-            <input type="text" name="kullanici" id="username" placeholder="username">
+            <input type="text" name="lastname" id="lastname" placeholder="last name">
+        </div>
+
+        <div class="form-item">
+                <span class="material-icons-outlined">
+                    account_circle
+                    </span>
+            <input type="text" name="username" id="username" placeholder="username">
         </div>
 
         <div class="form-item">
