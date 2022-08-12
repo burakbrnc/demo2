@@ -8,13 +8,11 @@ import javapart.Kullanici;
 import javapart.Erisim;
 
 
-
 @WebServlet(name = "Login", urlPatterns = "/login")
 
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
 
     }
     @Override
@@ -25,11 +23,13 @@ public class Login extends HttpServlet {
 
         if(k!=null) {
             request.getSession().setAttribute("kullanici", k);
-            response.sendRedirect("admin/index.jsp");
+            response.sendRedirect("anasayfa.jsp");
         }
         else {
             request.getRequestDispatcher("/index.jsp").forward(request,response);
         }
+        // Patient a = new PatientErisim().getirPatient();
+
 
 
 
