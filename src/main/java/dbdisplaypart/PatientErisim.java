@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PatientErisim {
 
-    private static final String insert_patients_sql = "INSERT INTO patients" + "(first_name,last_name,tc_no,job,gender,report_date,adress) values" + "(?,?,?);";
+    private static final String insert_patients_sql = "INSERT INTO patients" + "(first_name,last_name,tc_no,job,gender,report_date,address) values" + "(?,?,?);";
     private static final String update_patients_sql = "update users set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=?;";
     private static final String select_patient_by_id = "select * from patients where patient_id =?";
     private static final String select_all_patients = "select * from patients";
@@ -37,7 +37,7 @@ public class PatientErisim {
             preparedStatement.setString(4, patient.getDate_of_birth());
             preparedStatement.setLong(5, patient.getTel_no());
             preparedStatement.setString(5, patient.getReport_date());
-            preparedStatement.setString(5, patient.getAdress());
+            preparedStatement.setString(5, patient.getAddress());
         }
     }
 
@@ -52,7 +52,7 @@ public class PatientErisim {
             preparedStatement.setString(4, patient.getDate_of_birth());
             preparedStatement.setLong(5, patient.getTel_no());
             preparedStatement.setString(5, patient.getReport_date());
-            preparedStatement.setString(5, patient.getAdress());
+            preparedStatement.setString(5, patient.getAddress());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
 
@@ -78,6 +78,7 @@ public class PatientErisim {
         return p;
     }
     //SELECT ALL PATIENTS
+
 
 
     public List<Patient> selectallPatient(int patient_id) {

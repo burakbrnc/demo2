@@ -1,5 +1,7 @@
 package dbdisplaypart;
 
+import java.sql.Date;
+
 public class Patient {
     int patient_id;
     String first_name;
@@ -10,13 +12,13 @@ public class Patient {
     String job;
     String gender;
     String report_date; //YYYY-MM-DD
-    String adress;
+    String address;
 
 
     public Patient(Patient patient){
 
     }
-    public Patient(int patient_id, String first_name, String last_name, Long tc_no, String date_of_birth, Long tel_no, String job, String gender, String report_date, String adress){
+    public Patient(int patient_id, String first_name, String last_name, Long tc_no, String date_of_birth, Long tel_no, String job, String gender, String report_date, String address){
         this.patient_id=patient_id;
         this.first_name=first_name;
         this.last_name=last_name;
@@ -26,7 +28,7 @@ public class Patient {
         this.job=job;
         this.gender=gender;
         this.report_date=report_date;
-        this.adress=adress;
+        this.address=address;
     }
     public int getPatient_id() {
         return patient_id;
@@ -80,6 +82,7 @@ public class Patient {
     public String getGender() {return gender;}
     public void setGender(String gender) {
         this.gender = gender;
+
     }
 
     public String getReport_date(){return report_date;}
@@ -87,6 +90,6 @@ public class Patient {
         this.report_date = report_date;
     }
 
-    public String getAdress(){return adress;}
-    public void setAdress(String adress){this.adress = adress;}
+    public String getAddress(){return address;}
+    public void setAddress(String address){this.address = address;}
 }
