@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
         DispatcherType.FORWARD,
         DispatcherType.INCLUDE
 }
-        , urlPatterns = { "/admin/*" })
+        , urlPatterns = {"/servlet/admin/*"})
 
 public class LoginFilter implements Filter {
 
