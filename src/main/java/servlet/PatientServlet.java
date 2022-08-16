@@ -10,83 +10,93 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "PatientServlet", value = "/PatientServlet")
+@WebServlet(name = "PatientServlet", value = "/PatientServlet/*")
 public class PatientServlet extends HttpServlet {
-
-
-
-    private PatientErisim patientErisim;
-
+    Patient p = new Patient();
+    public PatientErisim patientErisim;
     public PatientServlet() {
         this.patientErisim = new PatientErisim();
-
     }
     //form sayfasını yönlendiren method
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uid = request.getParameter("uid");
+        switch (uid){
+            case "new":
+                this.showNewForm(request, response);
+                break;
+            case "insert":
+                try {
+                    this.insertPatient(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                break;
+            case "delete":
+                try {
+                    this.deletePatient(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "update":
+                try {
+                    this.updatePatient(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "post" :
+                doPost(request, response);
+                break;
+            default:
+                try {
+                    this.listPatient(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("RegisterPatient.jsp") ;
+        requestDispatcher.forward(request,response);
+    }
+
     protected void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("anasayfa.jsp") ;
         requestDispatcher.forward(request,response);
     }
+
     public void insertPatient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        Patient newPatient = new Patient(Integer.parseInt(request.getParameter("patient_id")), request.getParameter("first_name"), request.getParameter("last_name"), Long.parseLong(request.getParameter("tc_no")), request.getParameter("date_of_birth"), Long.parseLong(request.getParameter("tel_no")), request.getParameter("job"), request.getParameter("gender"), request.getParameter("report_date"), request.getParameter("address"));
+
+        Patient newPatient = new Patient(1,"ahmet","a", 1L,"asd123", 3L,"a","m","adasd1","a");
         patientErisim.insertPatient(newPatient);
-        response.sendRedirect("list");//do get methoduna gönderiyor o da inserte sallıyor (calısıp calısmadıgından emin değilim)
+        listPatient(request, response);
     }
 
     public void deletePatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+
         int patient_id = Integer.parseInt(request.getParameter("patient_id"));
         patientErisim.deletePatient(patient_id);
-        response.sendRedirect("list");
+        listPatient(request, response);
     }
+
     public void listPatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 
         List<Patient> listPatient = patientErisim.selectallPatient();
         request.setAttribute("listPatient",listPatient);
         RequestDispatcher dispatcher = request.getRequestDispatcher("anasayfa.jsp");
         dispatcher.forward(request,response);
-
-
     }
+    public void updatePatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 
 
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getServletPath();
-
-        switch (action){
-            case "/new":
-                showNewForm(request,response);
-                break;
-            case "/insert":
-                try {
-                    insertPatient(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-            case "/delete":
-                try {
-                    deletePatient(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            case "/update":
-            default:
-                try {
-                    listPatient(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
         }
-
-
     }
 
-
-
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-}

@@ -35,7 +35,7 @@
             background: #f1f1f1;
         }
 
-        input[type=text]:focus, input[type=password]:focus,  {
+        input[type=text]:focus, input[type=password]:focus{
             background-color: #ddd;
             outline: none;
         }
@@ -76,39 +76,42 @@
 </head>
 <body>
 
-<form action="Register" method="post">
+<form action="PatientServlet?uid=insert" method="get">
     <div class="container">
         <h1>Hasta Kayıt Formu</h1>
         <p>Aşağıdaki bilgiler hasta kaydı için gereklidir</p>
         <hr>
 
-        <label for="fname"><b>İsim</b></label>
-        <input type="text" placeholder="Hasta Adı Giriniz" name="firstname" id="fname" required>
+        <label for="first_name"><b>İsim</b></label>
+        <input type="text" placeholder="Hasta Adı Giriniz" name="first_name" id="first_name" required>
 
-        <label for="lname"><b>Soyadı</b></label>
-        <input type="text" placeholder="Hasta Soyadı Giriniz" name="lastname" id="lname" required>
+        <label for="last_name"><b>Soyadı</b></label>
+        <input type="text" placeholder="Hasta Soyadı Giriniz" name="last_name" id="last_name" required>
 
-        <label for="birth"><b>Doğum Tarihi</b></label>
-        <input type="date" placeholder="Doğum Tarihi" name="birth" id="birth" required>
+        <label for="tc_no"><b>Tc Kimlik No</b></label>
+        <input type="text" placeholder="T.C. Kimlik No" name="tc_no" id="tc_no" required>
         <br>
 
-        <label for="tc"><b>Tc Kimlik No</b></label>
-        <input type="text" placeholder="T.C. Kimlik No" name="tc" id="tc" required>
+        <label for="date_of_birth"><b>Doğum Tarihi</b></label>
+        <input type="text" placeholder="Doğum Tarihi" name="date_of_birth" id="date_of_birth" required>
 
-        <label for="adres"><b>Adres</b></label>
-        <input type="text" placeholder="Adres Giriniz" name="adres" id="adres" required>
-
-        <label for="tel"><b> Cep Telefon Numarası</b></label>
-        <input type="text" placeholder="Tel No (başında 0 olmadan) örn 555******" name="tel" id="tel" required>
+        <label for="tel_no"><b> Cep Telefon Numarası</b></label>
+        <input type="text" placeholder="Tel No (başında 0 olmadan) örn 555******" name="tel_no" id="tel_no" required>
 
         <label for="job"><b>Meslek</b></label>
         <input type="text" placeholder="Meslek Giriniz" name="job" id="job" required>
 
         <label for="gender"><b>Cinsiyet</b></label>
         <input type="text" placeholder="Cinsiyet (kadın için K erkek için E giriniz)" name="gender" id="gender" required>
+
+        <label for="report_date"><b>rapor tarihi</b></label>
+        <input type="text" placeholder="Rapor Tarihi" name="report_date" id="report_date" required>
+
+        <label for="address"><b>Adres</b></label>
+        <input type="text" placeholder="Adres Giriniz" name="address" id="address" required>
         <hr>
 
-        <button type="submit" class="registerbtn">Bilgileri Kaydet</button>
+        <a href="PatientServlet?uid=insert" type="submit" class="registerbtn">Bilgileri Kaydet </a>
     </div>
 
 

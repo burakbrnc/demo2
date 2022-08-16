@@ -13,7 +13,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: tomato">
+         style="background-color: deepskyblue">
         <div>
             <a href="http://localhost:8080/demo2_war_exploded/" class="navbar-brand"> Log Out </a>
         </div>
@@ -34,29 +34,29 @@
         <hr>
         <div class="container text-left">
 
-            <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add
+            <a href="PatientServlet?uid=post" class="btn btn-success">Add
                 New Patient</a>
+
         </div>
         <br>
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>patient_id</th>
-                <th>first_name</th>
-                <th>last_name</th>
-                <th>tc_no</th>
-                <th>date_of_birth</th>
-                <th>tel_no</th>
-                <th>job</th>
-                <th>gender</th>
-                <th>report_date</th>
-                <th>address</th>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Tc No</th>
+                <th>Date Of Birth</th>
+                <th>Tel No</th>
+                <th>Job</th>
+                <th>Gender</th>
+                <th>Report Date</th>
+                <th>Address</th>
 
             </tr>
             </thead>
             <tbody>
             <!--   for (Todo todo: todos) {  -->
-            <jsp:useBean id="listPatient" scope="request" type="java.util.List"/>
             <c:forEach var="Patient" items="${listPatient}">
 
                 <tr>
@@ -64,18 +64,28 @@
                     <td><c:out value="${Patient.first_name}" /></td>
                     <td><c:out value="${Patient.last_name}" /></td>
                     <td><c:out value="${Patient.tc_no}" /></td>
-                    <td><c:out value="${Patient.tc_no}" /></td>
-                    <td><c:out value="${Patient.tc_no}" /></td>
-                    <td><a href="edit?id=<c:out value='${Patient.patient_id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="delete?id=<c:out value='${Patient.patient_id}' />">Delete</a></td>
+                    <td><c:out value="${Patient.date_of_birth}" /></td>
+                    <td><c:out value="${Patient.tel_no}" /></td>
+                    <td><c:out value="${Patient.job}" /></td>
+                    <td><c:out value="${Patient.gender}" /></td>
+                    <td><c:out value="${Patient.report_date}" /></td>
+                    <td><c:out value="${Patient.address}" /></td>
+
+                    <td><a href="PatientServlet?uid=update&patient_id=<c:out value='${Patient.patient_id}' />">Edit</a>
+
+
+                        <a href="PatientServlet?uid=delete&patient_id=<c:out value='${Patient.patient_id}' />">Delete</a>
+
+
+                        </td>
                 </tr>
             </c:forEach>
-            <!-- } -->
+
             </tbody>
 
         </table>
     </div>
 </div>
 </body>
+
 </html>

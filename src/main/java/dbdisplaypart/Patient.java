@@ -1,5 +1,7 @@
 package dbdisplaypart;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 
 public class Patient {
@@ -15,9 +17,7 @@ public class Patient {
     String address;
 
 
-    public Patient(Patient patient){
 
-    }
     public Patient(int patient_id, String first_name, String last_name, Long tc_no, String date_of_birth, Long tel_no, String job, String gender, String report_date, String address){
         this.patient_id=patient_id;
         this.first_name=first_name;
@@ -30,6 +30,11 @@ public class Patient {
         this.report_date=report_date;
         this.address=address;
     }
+
+    public Patient() {
+
+    }
+
     public int getPatient_id() {
         return patient_id;
     }
@@ -97,4 +102,6 @@ public class Patient {
 
     public String getAddress(){return address;}
     public void setAddress(String address){this.address = address;}
+
+
 }
