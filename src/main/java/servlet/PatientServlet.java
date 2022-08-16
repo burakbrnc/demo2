@@ -12,9 +12,6 @@ import java.util.List;
 
 @WebServlet(name = "PatientServlet", value = "/PatientServlet")
 public class PatientServlet extends HttpServlet {
-
-
-
     private PatientErisim patientErisim;
 
     public PatientServlet() {
@@ -38,16 +35,11 @@ public class PatientServlet extends HttpServlet {
         response.sendRedirect("list");
     }
     public void listPatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-
         List<Patient> listPatient = patientErisim.selectallPatient();
         request.setAttribute("listPatient",listPatient);
         RequestDispatcher dispatcher = request.getRequestDispatcher("anasayfa.jsp");
         dispatcher.forward(request,response);
-
-
     }
-
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

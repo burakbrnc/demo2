@@ -4,6 +4,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
+
+import dbdisplaypart.Patient;
+import dbdisplaypart.PatientErisim;
 import javapart.Kullanici;
 import javapart.Erisim;
 
@@ -23,7 +27,11 @@ public class Login extends HttpServlet {
 
         if(k!=null) {
             request.getSession().setAttribute("kullanici", k);
-            response.sendRedirect("anasayfa.jsp");
+            List<Patient> listPatient = new PatientErisim().selectallPatient();
+            request.setAttribute("listPatient",listPatient);
+
+
+            request.getRequestDispatcher("anasayfa.jsp").forward(request,response);;
         }
         else {
             request.getRequestDispatcher("/index.jsp").forward(request,response);
