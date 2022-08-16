@@ -1,39 +1,28 @@
 package servlet;
 
-import javapart.Insert;
 import javapart.InsertPatient;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+@WebServlet (name = "RegisterPatient", value = "/RegisterPatient")
+public class RegisterPatient extends HttpServlet {
+    public RegisterPatient() {
+        super();
+    }
 
-
-@WebServlet(name = "Register", value = "/Register")
-public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("sd");
         getServletContext().getRequestDispatcher("/RegisterPatient.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*Insert toDb = new Insert();
-        String firstname =request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String username = request.getParameter("username");
-        String password =request.getParameter("sifre");
-        try {
-            toDb.insertRecord(firstname,lastname,username,password);
-        } catch (SQLException | ClassNotFoundException e) {
-            // print SQL exception information
-
-        }
-        System.out.println(password+ firstname+ lastname+ username);*/
-
         InsertPatient patient = new InsertPatient();
         String firstname =request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
@@ -50,7 +39,5 @@ public class Register extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
-    }
-
+}
