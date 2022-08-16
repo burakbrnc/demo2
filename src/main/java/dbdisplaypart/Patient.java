@@ -90,6 +90,11 @@ public class Patient {
         this.report_date = report_date;
     }
 
+    public int test()
+    {
+        return  1;
+    }
+
     public String getAddress(){return address;}
     public void setAddress(String address){this.address = address;}
 }
