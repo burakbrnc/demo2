@@ -81,11 +81,11 @@ public class PatientErisim {
 
 
 
-    public List<Patient> selectallPatient(int patient_id) {
+    public List<Patient> selectallPatient() {
         List<Patient> patientList = new ArrayList<Patient>();
         try (Connection c = getConnection();
              PreparedStatement preparedStatement = c.prepareStatement(select_all_patients)) {
-            preparedStatement.setInt(1, patient_id);
+
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 patientList.add(new Patient(rs.getInt("patient_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getLong("tc_no"), rs.getString("date_of_birth"), rs.getLong("tel_no"), rs.getString("job"), rs.getString("gender"), rs.getString("report_date"), rs.getString("address")));
