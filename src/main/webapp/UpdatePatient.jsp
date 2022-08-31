@@ -1,3 +1,4 @@
+<jsp:useBean id="Patient" scope="request" type="dbdisplaypart.Patient"/>
 <%--
   Created by IntelliJ IDEA.
   User: elifsen
@@ -76,42 +77,42 @@
 </head>
 <body>
 
-<form action="PatientServlet?uid=insert" method="get">
+<form action="PatientServlet?uid=update" method="get">
     <div class="container">
         <h1>Hasta Kayıt Formu</h1>
         <p>Aşağıdaki bilgiler hasta kaydı için gereklidir</p>
         <hr>
 
         <label for="first_name"><b>İsim</b></label>
-        <input type="text" placeholder="Hasta Adı Giriniz" name="first_name" id="first_name" required>
+        <input type="text" placeholder="Hasta Adını Giriniz" name="first_name" id="first_name" value="${Patient.first_name}" required>
 
         <label for="last_name"><b>Soyadı</b></label>
-        <input type="text" placeholder="Hasta Soyadı Giriniz" name="last_name" id="last_name" required>
+        <input type="text" placeholder="Hasta Soyadı Giriniz" name="last_name" id="last_name" value="${Patient.last_name}" required>
 
         <label for="tc_no"><b>Tc Kimlik No</b></label>
-        <input type="text" minlength="11" placeholder="T.C. Kimlik No" name="tc_no" id="tc_no" required>
+        <input type="text" minlength="11" placeholder="T.C. Kimlik No" name="tc_no" id="tc_no" value="${Patient.tc_no}" required>
         <br>
 
         <label for="date_of_birth"><b>Doğum Tarihi</b></label>
-        <input type="date" placeholder="Doğum Tarihi" name="date_of_birth" id="date_of_birth" required>
+        <input type="date" placeholder="Doğum Tarihi" name="date_of_birth" id="date_of_birth" value="${Patient.date_of_birth}" required>
 
         <label for="tel_no"><b> Cep Telefon Numarası</b></label>
-        <input type="text" minlength="10" placeholder="Tel No (başında 0 olmadan) örn 555******" name="tel_no" id="tel_no" required>
+        <input type="text" minlength="10" placeholder="Tel No (başında 0 olmadan) örn 555******" name="tel_no" id="tel_no" value="${Patient.tel_no}" required>
 
         <label for="job"><b>Meslek</b></label>
-        <input type="text" placeholder="Meslek Giriniz" name="job" id="job" required>
+        <input type="text" placeholder="Meslek Giriniz" name="job" id="job" value="${Patient.job}" required>
 
         <label for="gender"><b>Cinsiyet</b></label>
-        <input type="text" placeholder="Cinsiyet (kadın için K erkek için E giriniz)" name="gender" id="gender" required>
+        <input type="text" placeholder="Cinsiyet (kadın için K erkek için E giriniz)" name="gender" id="gender" value="${Patient.gender}" required>
 
         <label for="report_date"><b>rapor tarihi</b></label>
-        <input type="date" placeholder="Rapor Tarihi" name="report_date" id="report_date" required>
+        <input type="date" placeholder="Rapor Tarihi" name="report_date" id="report_date" value="${Patient.report_date}" required>
 
         <label for="address"><b>Adres</b></label>
-        <input type="text" placeholder="Adres Giriniz" name="address" id="address" required>
+        <input type="text" placeholder="Adres Giriniz" name="address" id="address" value="${Patient.address}" required>
         <hr>
 
-        <input type="hidden" placeholder="Adres Giriniz" name="uid" id="uid" value="insert" required>
+        <input type="hidden" name="uid" id="uid" value="update" required>
 
         <button type="submit" class="registerbtn"> Bilgileri Kaydet  </button>
     </div>

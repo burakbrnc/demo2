@@ -8,10 +8,20 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet(name = "PatientServlet", value = "/PatientServlet/*")
 public class PatientServlet extends HttpServlet {
+
+    DateTimeFormatter dateFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .appendPattern("yyyy-MM-dd")
+                    .toFormatter(Locale.ENGLISH);
     Patient p = new Patient();
     public PatientErisim patientErisim;
     public PatientServlet() {
@@ -40,6 +50,13 @@ public class PatientServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "edit":
+                try {
+                    this.showEditForm(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             case "update":
                 try {
                     this.updatePatient(request,response);
@@ -62,6 +79,7 @@ public class PatientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("first_name");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("RegisterPatient.jsp") ;
         requestDispatcher.forward(request,response);
     }
@@ -74,9 +92,15 @@ public class PatientServlet extends HttpServlet {
 
     public void insertPatient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 
-        Patient newPatient = new Patient(1,"ahmet","a", 1L,"asd123", 3L,"a","m","adasd1","a");
-        patientErisim.insertPatient(newPatient);
-        listPatient(request, response);
+
+        try {
+            String name = request.getParameter("first_name");
+            Patient newPatient = new Patient(request.getParameter("first_name"), request.getParameter("last_name"), Long.parseLong(request.getParameter("tc_no")), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)), Long.parseLong(request.getParameter("tel_no")), request.getParameter("job"), request.getParameter("gender"), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter)), request.getParameter("address"));
+            patientErisim.insertPatient(newPatient);
+            listPatient(request, response);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void deletePatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -95,8 +119,42 @@ public class PatientServlet extends HttpServlet {
     }
     public void updatePatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 
+        Patient p = new Patient();
+        p.getFirst_name();
 
 
+        try {
+            //showEditForm(request, response);
+
+            p.setPatient_id(Integer.parseInt(request.getParameter("patient_id")));
+            p.setFirst_name(request.getParameter("first_name"));
+            p.setLast_name(request.getParameter("last_name"));
+            p.setTc_no(Long.parseLong(request.getParameter("tc_no")));
+            p.setDate_of_birth(java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)));
+            p.setTel_no(Long.parseLong(request.getParameter("tel_no")));
+            p.setJob(request.getParameter("job"));
+            p.setGender(request.getParameter("gender"));
+            p.setReport_date(java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter)));
+            p.setAddress(request.getParameter("address"));
+            //Patient patient = new Patient(request.getParameter("first_name"), request.getParameter("last_name"), Long.parseLong(request.getParameter("tc_no")), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)), Long.parseLong(request.getParameter("tel_no")), request.getParameter("job"), request.getParameter("gender"), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter)), request.getParameter("address"));
+            patientErisim.updatePatient(p);
+
+            listPatient(request, response);
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+        Patient existingPatient = PatientErisim.selectPatient(patient_id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("UpdatePatient.jsp");
+        request.setAttribute("Patient", existingPatient);
+        dispatcher.forward(request, response);
+
+    }
     }
 
