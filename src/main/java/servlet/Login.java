@@ -17,7 +17,7 @@ import javapart.Erisim;
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    doPost(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
             request.setAttribute("listPatient",listPatient);
 
 
-            request.getRequestDispatcher("anasayfa.jsp").forward(request,response);;
+            request.getRequestDispatcher("anasayfa.jsp").forward(request,response);
         }
         else {
             request.getRequestDispatcher("/index.jsp").forward(request,response);

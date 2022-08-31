@@ -213,7 +213,7 @@
                 <span class="material-icons-outlined">
                     lock
                     </span>
-            <input type="text" name="kullanici" id="pass1" placeholder="password">
+            <input type="text" name="pass" id="pass1" placeholder="password">
         </div>
 
         <div class="form-item">
@@ -224,7 +224,9 @@
 
         </div>
 
+
         <button type="submit"> LOGIN </button>
+
 
         <div class="options">
 

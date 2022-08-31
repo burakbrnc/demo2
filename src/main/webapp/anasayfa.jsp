@@ -14,7 +14,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: tomato">
+         style="background-color: deepskyblue">
         <div>
             <a href="http://localhost:8080/demo2_war_exploded/" class="navbar-brand"> Log Out </a>
         </div>
@@ -35,8 +35,9 @@
         <hr>
         <div class="container text-left">
 
-            <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add
+            <a href="PatientServlet?uid=post" class="btn btn-success">Add
                 New Patient</a>
+
         </div>
         <br>
         <table class="table table-bordered">
@@ -71,12 +72,17 @@
                     <td><c:out value="${Patient.report_date}" /></td>
                     <td><c:out value="${Patient.address}" /></td>
 
-                    <td><a href="edit?id=<c:out value='${Patient.patient_id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="delete?id=<c:out value='${Patient.patient_id}' />">Delete</a></td>
+                    <td>
+                        <a href="PatientServlet?uid=edit&patient_id=<c:out value='${Patient.patient_id}' />&first_name=<c:out value='${Patient.first_name}' />&last_name=<c:out value='${Patient.last_name}' />&tc_no=<c:out value='${Patient.tc_no}' />&date_of_birth=<c:out value='${Patient.date_of_birth}'/>&tel_no=<c:out value='${Patient.tel_no}' />&job=<c:out value='${Patient.job}' />&gender=<c:out value='${Patient.gender}' />&report_date=<c:out value='${Patient.report_date}' />&address=<c:out value='${Patient.address}' />">Edit</a>
+
+
+                        <a href="PatientServlet?uid=delete&patient_id=<c:out value='${Patient.patient_id}' />">Delete</a>
+
+
+                        </td>
                 </tr>
             </c:forEach>
-            <!-- } -->
+
             </tbody>
 
         </table>

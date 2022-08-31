@@ -4,16 +4,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PatientErisim {
 
-    private static final String insert_patients_sql = "INSERT INTO patients" + "(first_name,last_name,tc_no,job,gender,report_date,address) values" + "(?,?,?);";
-    private static final String update_patients_sql = "update users set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=?;";
+    private static final String insert_patients_sql = "INSERT INTO patients" + "(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address) values" + "(?,?,?,?,?,?,?,?,?);";
+    private static final String update_patients_sql = "update patients set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=?;";
     private static final String select_patient_by_id = "select * from patients where patient_id =?";
     private static final String select_all_patients = "select * from patients";
     private static final String delete_patients_sql = "delete from patients where patient_id = ?;";
 
 
-    protected Connection getConnection() {
+
+    protected static Connection getConnection() {
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -30,14 +32,22 @@ public class PatientErisim {
 
     public void insertPatient(Patient patient) throws SQLException {
         try (Connection c = getConnection();
+
+            // first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address
              PreparedStatement preparedStatement = c.prepareStatement(insert_patients_sql)) {
             preparedStatement.setString(1, patient.getFirst_name());
             preparedStatement.setString(2, patient.getLast_name());
             preparedStatement.setLong(3, patient.getTc_no());
-            preparedStatement.setString(4, patient.getDate_of_birth());
+            preparedStatement.setDate(4, patient.getDate_of_birth());
             preparedStatement.setLong(5, patient.getTel_no());
-            preparedStatement.setString(5, patient.getReport_date());
-            preparedStatement.setString(5, patient.getAddress());
+            preparedStatement.setString(6, patient.getJob());
+            preparedStatement.setString(7, patient.getGender());
+            preparedStatement.setDate(8,  patient.getReport_date());
+            preparedStatement.setString(9, patient.getAddress());
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
         }
     }
 
@@ -49,10 +59,12 @@ public class PatientErisim {
             preparedStatement.setString(1, patient.getFirst_name());
             preparedStatement.setString(2, patient.getLast_name());
             preparedStatement.setLong(3, patient.getTc_no());
-            preparedStatement.setString(4, patient.getDate_of_birth());
+            preparedStatement.setDate(4, patient.getDate_of_birth());
             preparedStatement.setLong(5, patient.getTel_no());
-            preparedStatement.setString(5, patient.getReport_date());
-            preparedStatement.setString(5, patient.getAddress());
+            preparedStatement.setString(6, patient.getJob());
+            preparedStatement.setString(7, patient.getGender());
+            preparedStatement.setDate(8, patient.getReport_date());
+            preparedStatement.setString(9, patient.getAddress());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
 
@@ -62,14 +74,14 @@ public class PatientErisim {
 
     }
     //SELECT PATIENT BY ID
-    public Patient selectPatient(int patient_id) {
+    public static Patient selectPatient(int patient_id) {
         Patient p = null;
         try (Connection c = getConnection();
              PreparedStatement preparedStatement = c.prepareStatement(select_patient_by_id)) {
             preparedStatement.setInt(1, patient_id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                p = new Patient(rs.getInt("patient_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getLong("tc_no"), rs.getString("date_of_birth"), rs.getLong("tel_no"), rs.getString("job"), rs.getString("gender"), rs.getString("report_date"), rs.getString("address"));
+                p = new Patient(rs.getInt("patient_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getLong("tc_no"), rs.getDate("date_of_birth"), rs.getLong("tel_no"), rs.getString("job"), rs.getString("gender"), rs.getDate("report_date"), rs.getString("address"));
             }
 
         } catch (SQLException e) {
@@ -88,7 +100,7 @@ public class PatientErisim {
 
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                patientList.add(new Patient(rs.getInt("patient_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getLong("tc_no"), rs.getString("date_of_birth"), rs.getLong("tel_no"), rs.getString("job"), rs.getString("gender"), rs.getString("report_date"), rs.getString("address")));
+                patientList.add(new Patient(rs.getInt("patient_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getLong("tc_no"), rs.getDate("date_of_birth"), rs.getLong("tel_no"), rs.getString("job"), rs.getString("gender"), rs.getDate("report_date"), rs.getString("address")));
             }
 
         } catch (SQLException e) {
@@ -97,7 +109,7 @@ public class PatientErisim {
         return patientList;
     }
     // DELETE PATIENT
-    public boolean deletePatient(int patient_id) {
+    public boolean deletePatient(int patient_id) throws SQLException {
         boolean rowDeleted;
         try (Connection c = getConnection();
              PreparedStatement preparedStatement = c.prepareStatement(delete_patients_sql)) {
@@ -105,16 +117,13 @@ public class PatientErisim {
             preparedStatement.setInt(1, patient_id);
             rowDeleted = preparedStatement.executeUpdate() > 0;
 
-
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return rowDeleted;
-
-
     }
+
 
 }
 

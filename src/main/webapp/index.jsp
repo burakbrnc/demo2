@@ -203,7 +203,7 @@
 
     </form>
     <form action="Register" method="get" >
-        <p><button type="register"> Create An Account </button></p>
+        <p><button type="submit"> Create An Account </button></p>
         </form>
 
 </div>

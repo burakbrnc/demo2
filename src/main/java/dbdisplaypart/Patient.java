@@ -1,25 +1,30 @@
 package dbdisplaypart;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Patient {
     int patient_id;
     String first_name;
     String last_name;
     Long tc_no;
-    String date_of_birth;
+    java.sql.Date date_of_birth;
     Long tel_no;
     String job;
     String gender;
-    String report_date; //YYYY-MM-DD
+    java.sql.Date report_date; //YYYY-MM-DD
     String address;
 
-
-    public Patient(Patient patient){
-
-    }
-    public Patient(int patient_id, String first_name, String last_name, Long tc_no, String date_of_birth, Long tel_no, String job, String gender, String report_date, String address){
+    public Patient() {}
+    public Patient(int patient_id, String first_name, String last_name, Long tc_no, java.sql.Date date_of_birth, Long tel_no, String job, String gender, java.sql.Date report_date, String address){
         this.patient_id=patient_id;
+        setVariables(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address);
+    }
+    public Patient(String first_name, String last_name, Long tc_no, java.sql.Date date_of_birth, Long tel_no, String job, String gender, java.sql.Date report_date, String address){
+        setVariables(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address);
+    }
+
+    void setVariables(String first_name, String last_name, Long tc_no, java.sql.Date date_of_birth, Long tel_no, String job, String gender, java.sql.Date report_date, String address)
+    {
         this.first_name=first_name;
         this.last_name=last_name;
         this.tc_no=tc_no;
@@ -58,10 +63,10 @@ public class Patient {
         this.tc_no = tc_no;
     }
 
-    public String getDate_of_birth() {
+    public java.sql.Date getDate_of_birth() {
         return date_of_birth;
     }
-    public void setDate_of_birth(String date_of_birth) {
+    public void setDate_of_birth(java.sql.Date date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
@@ -85,8 +90,8 @@ public class Patient {
 
     }
 
-    public String getReport_date(){return report_date;}
-    public void setReport_date(String report_date) {
+    public java.sql.Date getReport_date(){return report_date;}
+    public void setReport_date(java.sql.Date report_date) {
         this.report_date = report_date;
     }
 
@@ -97,4 +102,6 @@ public class Patient {
 
     public String getAddress(){return address;}
     public void setAddress(String address){this.address = address;}
+
+
 }
