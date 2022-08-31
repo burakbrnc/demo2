@@ -18,17 +18,17 @@ public class Erisim {
 
         try {
             Class.forName("org.postgresql.Driver");
-            Connection c = getConnection("jdbc:postgresql://localhost:5432/idpw",
-                    "postgres", "burak586a");
+            Connection c = getConnection("jdbc:postgresql://localhost:5433/doctors-db",
+                    "postgres", "test");
 
-            String query = "select user_id, username,password from idpw where username=? and password=?";
+            String query = "select id, username,password from doctor where username=? and password=?";
             PreparedStatement pst = c.prepareStatement(query);
             pst.setString(1, Username);
             pst.setString(2, Password);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                k=new Kullanici(rs.getInt("user_id"),rs.getString("Username"), rs.getString("password"));
+                k=new Kullanici(rs.getInt("id"),rs.getString("username"), rs.getString("password"));
             }
         } catch (Exception e) {
             e.printStackTrace();

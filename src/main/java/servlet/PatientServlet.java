@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -125,19 +126,29 @@ public class PatientServlet extends HttpServlet {
 
         try {
             //showEditForm(request, response);
+            String name = request.getParameter("first_name");
+            String last= request.getParameter("last_name");
+            Long tc_no = Long.parseLong(request.getParameter("tc_no"));
+            Date date = (java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)));
+            Long tel = Long.parseLong(request.getParameter("tel_no"));
+            String job = request.getParameter("job");
+            String gender = request.getParameter("gender");
+            Date report = java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter));
+            String address =request.getParameter("address");
+            System.out.println(name+last+tc_no+date+tel+job);
+            System.out.println(date);
+            Patient newPatient = new Patient(name,last,tc_no, (java.sql.Date) date,tel,job,gender, (java.sql.Date) report,address);
+            int id = Integer.parseInt(request.getParameter("patient_id"));
+            Patient oldPatient = PatientErisim.selectPatient(id);
+            System.out.println(newPatient.getFirst_name());
+            System.out.println(oldPatient.getFirst_name());
+            patientErisim.updatePatient(oldPatient,newPatient);
 
-            p.setPatient_id(Integer.parseInt(request.getParameter("patient_id")));
-            p.setFirst_name(request.getParameter("first_name"));
-            p.setLast_name(request.getParameter("last_name"));
-            p.setTc_no(Long.parseLong(request.getParameter("tc_no")));
-            p.setDate_of_birth(java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)));
-            p.setTel_no(Long.parseLong(request.getParameter("tel_no")));
-            p.setJob(request.getParameter("job"));
-            p.setGender(request.getParameter("gender"));
-            p.setReport_date(java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter)));
-            p.setAddress(request.getParameter("address"));
+
+
+
             //Patient patient = new Patient(request.getParameter("first_name"), request.getParameter("last_name"), Long.parseLong(request.getParameter("tc_no")), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)), Long.parseLong(request.getParameter("tel_no")), request.getParameter("job"), request.getParameter("gender"), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter)), request.getParameter("address"));
-            patientErisim.updatePatient(p);
+            //patientErisim.updatePatient(p);
 
             listPatient(request, response);
         }

@@ -9,7 +9,7 @@ import java.sql.SQLException;
     private final String user = "postgres";
     private final String pas = "test";
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO idpw" +
+    private static final String INSERT_USERS_SQL = "INSERT INTO doctors-db" +
             "  (username, password) VALUES " +
             " (?, ?);";
 
@@ -20,8 +20,8 @@ import java.sql.SQLException;
 
                 Connection connection= null;
                 Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/idpw",
-                        "postgres", "burak586a") ;
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/doctors-db",
+                        "postgres", "test") ;
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL);

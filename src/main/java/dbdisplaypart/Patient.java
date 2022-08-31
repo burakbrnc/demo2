@@ -1,6 +1,6 @@
 package dbdisplaypart;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Patient {
     int patient_id;
@@ -19,7 +19,7 @@ public class Patient {
         this.patient_id=patient_id;
         setVariables(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address);
     }
-    public Patient(String first_name, String last_name, Long tc_no, java.sql.Date date_of_birth, Long tel_no, String job, String gender, java.sql.Date report_date, String address){
+    public Patient(String first_name, String last_name, Long tc_no, Date date_of_birth, Long tel_no, String job, String gender, Date report_date, String address){
         setVariables(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address);
     }
 

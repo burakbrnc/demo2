@@ -8,7 +8,7 @@ import java.util.List;
 public class PatientErisim {
 
     private static final String insert_patients_sql = "INSERT INTO patients" + "(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address) values" + "(?,?,?,?,?,?,?,?,?);";
-    private static final String update_patients_sql = "update patients set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=?;";
+    private static final String update_patients_sql = "update patients set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=? where patient_id=?;";
     private static final String select_patient_by_id = "select * from patients where patient_id =?";
     private static final String select_all_patients = "select * from patients";
     private static final String delete_patients_sql = "delete from patients where patient_id = ?;";
@@ -19,7 +19,7 @@ public class PatientErisim {
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/idpw", "postgres", "burak586a");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5433/doctors-db", "postgres", "test");
 
 
         } catch (ClassNotFoundException e) {
@@ -52,19 +52,20 @@ public class PatientErisim {
     }
 
     //UPDATE PATIENT
-    public void updatePatient(Patient patient) throws SQLException {
+    public void updatePatient(Patient oldPatient, Patient newPatient) throws SQLException {
         boolean rowUpdated;
         try (Connection c = getConnection();
              PreparedStatement preparedStatement = c.prepareStatement(update_patients_sql)) {
-            preparedStatement.setString(1, patient.getFirst_name());
-            preparedStatement.setString(2, patient.getLast_name());
-            preparedStatement.setLong(3, patient.getTc_no());
-            preparedStatement.setDate(4, patient.getDate_of_birth());
-            preparedStatement.setLong(5, patient.getTel_no());
-            preparedStatement.setString(6, patient.getJob());
-            preparedStatement.setString(7, patient.getGender());
-            preparedStatement.setDate(8, patient.getReport_date());
-            preparedStatement.setString(9, patient.getAddress());
+            preparedStatement.setString(1, newPatient.getFirst_name());
+            preparedStatement.setString(2, newPatient.getLast_name());
+            preparedStatement.setLong(3, newPatient.getTc_no());
+            preparedStatement.setDate(4, newPatient.getDate_of_birth());
+            preparedStatement.setLong(5, newPatient.getTel_no());
+            preparedStatement.setString(6, newPatient.getJob());
+            preparedStatement.setString(7, newPatient.getGender());
+            preparedStatement.setDate(8, newPatient.getReport_date());
+            preparedStatement.setString(9, newPatient.getAddress());
+            preparedStatement.setInt(10,oldPatient.getPatient_id());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
 

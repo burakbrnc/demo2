@@ -102,6 +102,10 @@
         <label for="job"><b>Meslek</b></label>
         <input type="text" placeholder="Meslek Giriniz" name="job" id="job" value="${Patient.job}" required>
 
+        <label for="job"><b>Meslek</b></label>
+        <input type="hidden" placeholder="Meslek Giriniz" name="patient_id" id="patient_id" value="${Patient.patient_id}" required>
+
+
         <label for="gender"><b>Cinsiyet</b></label>
         <input type="text" placeholder="Cinsiyet (kadın için K erkek için E giriniz)" name="gender" id="gender" value="${Patient.gender}" required>
 
