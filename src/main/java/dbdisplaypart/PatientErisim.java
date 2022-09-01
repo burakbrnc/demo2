@@ -8,7 +8,7 @@ import java.util.List;
 public class PatientErisim {
 
     private static final String insert_patients_sql = "INSERT INTO patients" + "(first_name,last_name,tc_no,date_of_birth,tel_no,job,gender,report_date,address) values" + "(?,?,?,?,?,?,?,?,?);";
-    private static final String update_patients_sql = "update patients set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=?;";
+    private static final String update_patients_sql = "update patients set first_name = ?,last_name = ?,tc_no = ?,date_of_birth = ?,tel_no = ?, job=?, gender=?, report_date=?,address=? where patient_id=?;";
     private static final String select_patient_by_id = "select * from patients where patient_id =?";
     private static final String select_all_patients = "select * from patients";
     private static final String delete_patients_sql = "delete from patients where patient_id = ?;";
@@ -67,6 +67,8 @@ public class PatientErisim {
             preparedStatement.setString(9, patient.getAddress());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
+
+
 
 
         }

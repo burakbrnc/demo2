@@ -77,14 +77,16 @@
 </head>
 <body>
 
-<form action="PatientServlet?uid=update" method="get">
+<form action="PatientServlet" method="post">
     <div class="container">
         <h1>Hasta Kayıt Formu</h1>
         <p>Aşağıdaki bilgiler hasta kaydı için gereklidir</p>
         <hr>
 
         <label for="first_name"><b>İsim</b></label>
-        <input type="text" placeholder="Hasta Adını Giriniz" name="first_name" id="first_name" value="${Patient.first_name}" required>
+        <input type="hidden" placeholder="patient_id" name="patient_id" id="patient_id" value="${Patient.patient_id}" required>
+
+        <input type="text" placeholder="first_name" name="first_name" id="first_name" value="${Patient.first_name}" required>
 
         <label for="last_name"><b>Soyadı</b></label>
         <input type="text" placeholder="Hasta Soyadı Giriniz" name="last_name" id="last_name" value="${Patient.last_name}" required>

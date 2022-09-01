@@ -30,6 +30,15 @@ public class PatientServlet extends HttpServlet {
     //form sayfasını yönlendiren method
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("first_name");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("RegisterPatient.jsp") ;
+        requestDispatcher.forward(request,response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         String uid = request.getParameter("uid");
         switch (uid){
             case "new":
@@ -64,8 +73,8 @@ public class PatientServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "post" :
-                doPost(request, response);
+            case "get" :
+                doGet(request, response);
                 break;
             default:
                 try {
@@ -75,13 +84,6 @@ public class PatientServlet extends HttpServlet {
                 }
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("first_name");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("RegisterPatient.jsp") ;
-        requestDispatcher.forward(request,response);
     }
 
     protected void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -120,13 +122,14 @@ public class PatientServlet extends HttpServlet {
     public void updatePatient (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 
         Patient p = new Patient();
-        p.getFirst_name();
+
+
 
 
         try {
             //showEditForm(request, response);
 
-            p.setPatient_id(Integer.parseInt(request.getParameter("patient_id")));
+           // p.setPatient_id(Integer.parseInt(request.getParameter("patient_id")));
             p.setFirst_name(request.getParameter("first_name"));
             p.setLast_name(request.getParameter("last_name"));
             p.setTc_no(Long.parseLong(request.getParameter("tc_no")));
@@ -138,10 +141,12 @@ public class PatientServlet extends HttpServlet {
             p.setAddress(request.getParameter("address"));
             //Patient patient = new Patient(request.getParameter("first_name"), request.getParameter("last_name"), Long.parseLong(request.getParameter("tc_no")), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("date_of_birth")), dateFormatter)), Long.parseLong(request.getParameter("tel_no")), request.getParameter("job"), request.getParameter("gender"), java.sql.Date.valueOf(LocalDate.parse((request.getParameter("report_date")), dateFormatter)), request.getParameter("address"));
             patientErisim.updatePatient(p);
+            p.getFirst_name();
 
             listPatient(request, response);
         }
         catch (Exception e){
+
             e.printStackTrace();
         }
 

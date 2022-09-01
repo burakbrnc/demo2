@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
+
 <head>
     <title>patient</title>
     <link rel="stylesheet"
@@ -34,7 +36,7 @@
         <hr>
         <div class="container text-left">
 
-            <a href="PatientServlet?uid=post" class="btn btn-success">Add
+            <a href="PatientServlet" class="btn btn-success">Add
                 New Patient</a>
 
         </div>
@@ -72,11 +74,33 @@
                     <td><c:out value="${Patient.address}" /></td>
 
                     <td>
-                        <a href="PatientServlet?uid=edit&patient_id=<c:out value='${Patient.patient_id}' />&first_name=<c:out value='${Patient.first_name}' />&last_name=<c:out value='${Patient.last_name}' />&tc_no=<c:out value='${Patient.tc_no}' />&date_of_birth=<c:out value='${Patient.date_of_birth}'/>&tel_no=<c:out value='${Patient.tel_no}' />&job=<c:out value='${Patient.job}' />&gender=<c:out value='${Patient.gender}' />&report_date=<c:out value='${Patient.report_date}' />&address=<c:out value='${Patient.address}' />">Edit</a>
+
+                        <form action="PatientServlet" method="post">
+                        <!--<a href="PatientServlet?uid=edit&patient_id=<c:out value='${Patient.patient_id}' />&first_name=<c:out value='${Patient.first_name}' />&last_name=<c:out value='${Patient.last_name}' />&tc_no=<c:out value='${Patient.tc_no}' />&date_of_birth=<c:out value='${Patient.date_of_birth}'/>&tel_no=<c:out value='${Patient.tel_no}' />&job=<c:out value='${Patient.job}' />&gender=<c:out value='${Patient.gender}' />&report_date=<c:out value='${Patient.report_date}' />&address=<c:out value='${Patient.address}' />">Edit</a>-->
+                            <input type="hidden" name="patient_id" value="<c:out value='${Patient.patient_id}' />" required>
+                            <input type="hidden" name="first_name" value="<c:out value='${Patient.first_name}' />" required>
+                            <input type="hidden" name="last_name" value="<c:out value='${Patient.last_name}' />" required>
+                            <input type="hidden" name="tc_no" value="<c:out value='${Patient.tc_no}' />" required>
+                            <input type="hidden" name="date_of_birth" value="<c:out value='${Patient.date_of_birth}' />" required>
+                            <input type="hidden" name="tel_no" value="<c:out value='${Patient.tel_no}' />" required>
+                            <input type="hidden" name="job" value="<c:out value='${Patient.job}' />" required>
+                            <input type="hidden" name="gender" value="<c:out value='${Patient.gender}' />" required>
+                            <input type="hidden" name="report_date" value="<c:out value='${Patient.report_date}' />" required>
+                            <input type="hidden" name="address" value="<c:out value='${Patient.address}' />" required>
+                            <input type="hidden" placeholder="Adres Giriniz" name="uid" value="edit" required>
+                            <button class="button">Edit</button>
+
+                        </form>
+                        <form action="PatientServlet" method="post">
+                       <!-- <a href="PatientServlet?uid=delete&patient_id=<c:out value='${Patient.patient_id}' />">Delete</a>-->
+                            <input type="hidden" name="patient_id" value="<c:out value='${Patient.patient_id}' />" required>
 
 
-                        <a href="PatientServlet?uid=delete&patient_id=<c:out value='${Patient.patient_id}' />">Delete</a>
+                            <button class="button" >Delete</button>
 
+                                <input type="hidden" name="uid" value="delete" required>
+
+                        </form>
 
                         </td>
                 </tr>

@@ -76,7 +76,7 @@
 </head>
 <body>
 
-<form action="PatientServlet?uid=insert" method="get">
+<form action="PatientServlet?uid=insert" method="post">
     <div class="container">
         <h1>Hasta Kayıt Formu</h1>
         <p>Aşağıdaki bilgiler hasta kaydı için gereklidir</p>
